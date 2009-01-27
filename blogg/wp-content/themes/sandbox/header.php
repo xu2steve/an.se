@@ -21,6 +21,7 @@
 	<script language="javascript" type="text/javascript">
 		var timer = 0;
 		var windowHeight = 0;
+		var pageHeight = 0;
 		
 		window.onresize = windowHeight;
 		
@@ -29,7 +30,7 @@
 			timer = setTimeout("animateBg", 500);
 		}
 		
-		function windowHeight() {
+		function getWindowHeight() {
 			if( typeof( window.innerWidth ) == 'number' ) {
 	 			  //Non-IE
 	 			  windowHeight = window.innerHeight;
@@ -55,8 +56,8 @@
  			  scrOfY = document.documentElement.scrollTop;
  			}
  			
- 			var endTop = ((scrOfY / (siteHeight - windowHeight) * siteHeight) + 100);
- 			var endHeight = (siteHeight - endTop);
+ 			var endTop = ((scrOfY / (pageHeight - windowHeight) * pageHeight) + 100);
+ 			var endHeight = (pageHeight - endTop);
 			$('wine').morph('top:' + endTop + 'px; height:' + endHeight + 'px;');
 		}
 		
@@ -64,14 +65,24 @@
 			$(id).setStyle({
 				display: 'block'
 			});
-			var top = $(id).getStyle('top');
+			var top = parseInt($(id).getStyle('top'));
 			$(id).setStyle({
-				height: ((siteHeight - top) + 'px'),
+				height: ((pageHeight - top) + 'px'),
 			});
-		} 
+		}
+		
+		function getPageHeight(){
+			if (window.innerHeight && window.scrollMaxY) {// Firefox
+				pageHeight = window.innerHeight + window.scrollMaxY;
+			} else if (document.body.scrollHeight > document.body.offsetHeight){ // all but Explorer Mac
+				pageHeight = document.body.scrollHeight;
+			} else { // works in Explorer 6 Strict, Mozilla (not FF) and Safari
+				pageHeight = document.body.offsetHeight;
+		  	}
+		 }
  	</script>
 </head>
-<body id="body" onload="setupZoom();activatePlaceholders();fixHeight('wine')" onscroll="scrolled()">
+<body id="body" onload="setupZoom();activatePlaceholders();getPageHeight();fixHeight('wine');getWindowHeight()" onscroll="scrolled()">
 	<div id="rightbg"></div>
 	<div id="bottle"></div>
 	<div id="leftbg"></div>

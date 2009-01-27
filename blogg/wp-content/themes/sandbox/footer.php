@@ -21,12 +21,8 @@
 		</div>
 	</div>
 	<div id="bottleneck">
-		<img src="/images-global/anti-flaskhals.png" alt="bottleneck"/>
+		<img src="/images-global/anti-flaskhals.png" alt="bottleneck" />
 	</div>
-	<script type="text/javascript">
-		var siteHeight = document.body.scrollHeight
-		document.body.onload = windowHeight;
-	</script>
 <?php wp_footer() ?>
 </body>
 </html>

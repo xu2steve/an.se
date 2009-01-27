@@ -81,7 +81,7 @@ blockquote {
 	right: 0;
 	width: 50%;
 	background-color: #e2d8db;
-	margin-right: -500px;
+	margin-right: -499px;
 }
 
 #leftbg {
@@ -97,6 +97,8 @@ blockquote {
 	margin-right: auto;
 	margin-left: auto;
 	width: 1000px;
+	height: 700px;
+	overflow: hidden;
 }
 
 #wine {
@@ -104,7 +106,7 @@ blockquote {
 	position: absolute;
 	z-index: -10;
 	width: 100%;
-	height: 0;
+	height: 300px;
 	top: 100px;
 	overflow: hidden;
 }
