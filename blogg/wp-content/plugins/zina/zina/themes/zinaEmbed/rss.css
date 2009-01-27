@@ -1,0 +1,16 @@
+body {
+	display: block;
+	font-size: 80%;
+	margin: 25px;
+	width: 800px;
+}
+
+img {
+	border:0;
+	float:left;
+	margin-right: 10px;
+}
+
+.item {
+	clear:both;
+}

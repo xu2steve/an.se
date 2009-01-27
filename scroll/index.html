@@ -1,0 +1,27 @@
+<html>
+<head>
+<script src="/js-global/animator.js" type="text/javascript"></script>
+<script language="javascript" type="text/javascript">
+	function $(id){
+		return document.getElementById(id);
+	}
+	var anim = Animator.apply($("stupidbutton"), "background-color: #FF00FF", {duration: 1000});
+	$("stupidbutton").onclick = function(){anim.seekTo(1);}
+
+</script>
+
+<style type="text/css">
+#stupidbutton {
+	background-color: blue;
+}
+</style>
+</head>
+<body onscroll="update()" id="lagg">
+   <button id="stupidbutton">I'm a button!</button>
+   <script>
+   
+	
+	
+	</script>
+</body>
+</html>

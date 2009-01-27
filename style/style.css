@@ -1,0 +1,326 @@
+/* @override 
+	http://anonymanykterister.se:3000/style/style.css
+	http://localhost/style/style.css
+*/
+
+/*
+THEME NAME: Sandbox
+THEME URI: http://www.plaintxt.org/themes/sandbox/
+DESCRIPTION: Rich with powerful and dynamic semantic class selectors, Sandbox is a canvas for CSS artists
+VERSION: 1.6
+AUTHOR: <a href="http://andy.wordpress.com/">Andy Skelton</a> &amp; <a href="http://www.plaintxt.org/">Scott Allan Wallick</a>
+AUTHOR URI:
+TAGS: sandbox, microformats, hcard, hatom, xoxo, widgets, blank slate, starter theme, minimalist, developer
+*/
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+html, body {
+	height: 100%;
+	text-align: justify;
+	font-family: "Lucida Grande", Lucida, Verdana, sans-serif;
+}
+
+a {
+	color: #000;
+}
+
+a:link, a:visited { 
+
+}
+
+a:hover {
+	background-color: #000;
+	color: #fff;
+}
+
+hr {
+	height: 2px;
+	background-color: #000;
+	border-style: none;
+}
+
+img.beta {
+	top: 0;
+	left: 0;
+	position: absolute;
+	display: block;
+}
+
+input[type=text] {
+	color: #808080;
+}
+
+input[type=text]:focus {
+	color: #000;
+}
+
+blockquote {
+  background: url(/images-global/quote.gif) no-repeat;
+  margin: 0;
+  padding: 0 40px 0 40px;
+	font-style: italic;
+}
+
+#bottle {
+	height: 100%;
+	left: 50%;
+	position: fixed;
+	background-color: #1f5336;
+	z-index: -15;
+	width: 1000px;
+	margin-left: -500px;
+}
+
+#rightbg {
+	position: fixed;
+	height: 100%;
+	right: 0;
+	width: 50%;
+	background-color: #e2d8db;
+	margin-right: -500px;
+}
+
+#leftbg {
+	position: fixed;
+	height: 100%;
+	left: 0;
+	width: 50%;
+	background-color: #e2d8db;
+	margin-left: -500px;
+}
+
+#bottleneck {
+	margin-right: auto;
+	margin-left: auto;
+	width: 1000px;
+}
+
+#wine {
+	display: none;
+	position: absolute;
+	z-index: -10;
+	width: 100%;
+	height: 0;
+	top: 100px;
+	overflow: hidden;
+}
+
+#surface {
+	background-repeat: repeat-x;
+	height: 10px;
+	z-index: -5;
+	width: 100%;
+	background-image: url(/images-global/Wine-surface.png);
+}
+
+#depth {
+	background-color: #800020;
+	height: 100%;
+	width: 100%;
+	position: absolute;
+	z-index: -5;
+}
+
+#BIGcontainer {
+	z-index: 0;
+	margin-right: auto;
+	margin-left: auto;
+	width: 900px;
+}
+
+#header {
+	height: 396px;
+	position: relative;
+}
+
+#container {
+	padding-right: 50px;
+	padding-left: 50px;
+	background: url(/images-global/AN-repeat.png) repeat-y;
+	padding-bottom: 1px;
+}
+
+
+
+/* @group navbar */
+
+#navbar {
+	margin-bottom: 5px;
+	font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+	position: relative;
+}
+
+#navbar ul {
+	text-transform: uppercase;
+	list-style: none outside;
+	padding: 0;
+	margin: 0;
+}
+
+#navbar li {
+	display: inline;
+}
+
+#navbar li a {
+	text-decoration: none;
+	padding: 3px 5px;
+	margin-right: 10px;
+	margin-top: 3px;
+}
+
+#link-hem {
+	color: #000;
+}
+
+#link-hem:hover {
+	color: #fff;
+	background-color: #000;
+}
+
+#link-blogg {
+	color: #3b120a;
+}
+
+#link-blogg:hover {
+	color: #fff;
+	background-color: #3b120a;
+}
+
+#link-forum {
+	color: #030;
+}
+
+#link-forum:hover {
+	color: #fff;
+	background-color: #030;
+}
+
+#link-kalender {
+	color: #29375e;
+}
+
+#link-kalender:hover {
+	color: #fff;
+	background-color: #29375e;
+}
+
+#link-info {
+	color: #6f6b41;
+}
+
+#link-info:hover {
+	color: #fff;
+	background-color: #6f6b41;
+}
+
+#search {
+	display: inline;
+	width: 280px;
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+
+form {
+	width: 280px;
+	display: inline;
+}
+
+#search input[type=text] {
+	font-size: 1em;
+}
+
+#search input.submit {
+	font-size: 1em;
+}
+
+/* @end */
+
+#content {
+	font-size: 80%;
+	padding-bottom: 10px;
+}
+
+#content a, #footer a {
+	font-weight: bold;
+}
+
+#main, #side {
+	margin-bottom: 20px;
+}
+
+#main {
+	width: 490px;
+	padding-right: 10px;
+	float: left;
+}
+
+#main h3 {
+	display: none;
+}
+
+#main img {
+	width: 100%;
+}
+
+#side {
+	width: 280px;
+	float: right;
+	clear: right;
+}
+
+#newsletter {
+	font-weight: bold;
+}
+
+#newsletter input[type=text] {
+	width: 182px;
+}
+
+#newsletter input[type=submit] {
+	width: 88px;
+}
+
+#footer {
+	clear: both;
+	border-top-style: solid;
+	padding-top: 10px;
+	font-size: 80%;
+}
+
+#footer p {
+	margin-bottom: 0;
+}
+
+.pagecap {
+	margin: 0;
+	padding: 0;
+	height: 52px;
+}
+
+.footnotes {
+	border-top-style: solid;
+	border-top-width: 1px;
+}
+
+.float-left {
+	float: left;
+}
+
+.middle {
+	text-align: center;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.float-right {
+	float: right;
+}
+.entry-date {
+  text-align: right;
+  color: #333;
+}

@@ -1,0 +1,229 @@
+/* @override http://anonymanykterister.se/style/style.css */
+
+/*
+THEME NAME: Sandbox
+THEME URI: http://www.plaintxt.org/themes/sandbox/
+DESCRIPTION: Rich with powerful and dynamic semantic class selectors, Sandbox is a canvas for CSS artists
+VERSION: 1.6
+AUTHOR: <a href="http://andy.wordpress.com/">Andy Skelton</a> &amp; <a href="http://www.plaintxt.org/">Scott Allan Wallick</a>
+AUTHOR URI:
+TAGS: sandbox, microformats, hcard, hatom, xoxo, widgets, blank slate, starter theme, minimalist, developer
+*/
+
+body {
+	text-align: justify;
+	font-family: "Lucida Grande", Lucida, Verdana, sans-serif;
+	margin: 0;
+}
+
+p {
+	margin-top: 1em;
+	margin-bottom: 1em;
+}
+
+a {
+	color: #000;
+}
+
+a:hover {
+	background-color: #000;
+	color: #fff;
+}
+
+#title a {
+	
+}
+
+hr {
+	height: 2px;
+	background-color: #000;
+	border-style: none;
+}
+
+img.beta {
+	position: fixed;
+	top: 0;
+	left: 0;
+}
+
+input[type=text] {
+	color: #808080;
+}
+
+input[type=text]:focus {
+	color: #000;
+}
+
+blockquote {
+  background: url(/images-global/quote.gif) no-repeat;
+  margin: 0;
+  padding: 0 40px 0 40px;
+	font-style: italic;
+}
+
+#container {
+	width: 900px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+/* @group navbar */
+
+#navbar {
+	margin-bottom: 5px;
+	font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+}
+
+#navbar ul {
+	
+	list-style-type: none;
+	text-transform: uppercase;
+	padding: 2px 0;
+	margin: 0 0 10px;
+	float: left;
+}
+
+#navbar li {
+	display: inline;
+	margin-right: 5px;
+}
+
+#navbar li a {
+	text-decoration: none;
+	padding: 3px 5px;
+}
+
+#link-hem {
+	color: #000;
+}
+
+#link-hem:hover {
+	color: #fff;
+	background-color: #000;
+}
+
+#link-blogg {
+	color: #3b120a;
+}
+
+#link-blogg:hover {
+	color: #fff;
+	background-color: #3b120a;
+}
+
+#link-forum {
+	color: #030;
+}
+
+#link-forum:hover {
+	color: #fff;
+	background-color: #030;
+}
+
+#link-kalender {
+	color: #29375e;
+}
+
+#link-kalender:hover {
+	color: #fff;
+	background-color: #29375e;
+}
+
+#link-info {
+	color: #6f6b41;
+}
+
+#link-info:hover {
+	color: #fff;
+	background-color: #6f6b41;
+}
+
+#search {
+	width: 280px;
+	float: right;
+	height: 26px;
+	text-align: right;
+}
+
+#search form {
+	margin-bottom: 10px;
+}
+
+#search input[type=text] {
+	font-size: 1em;
+	float: left;
+}
+
+#search input.submit {
+	font-size: 1em;
+}
+
+/* @end */
+
+#content {
+	min-height: 1000px;
+	font-size: 80%;
+	padding-bottom: 10px;
+}
+
+#content a, #footer a {
+	font-weight: bold;
+}
+
+#main {
+	width: 600px;
+	padding-right: 10px;
+	float: left;
+}
+
+#main img {
+	width: 100%;
+}
+
+#side {
+	width: 280px;
+	float: right;
+}
+
+#newsletter {
+	font-weight: bold;
+}
+
+#newsletter input[type=text] {
+	width: 182px;
+}
+
+#newsletter input[type=submit] {
+	width: 88px;
+}
+
+#footer {
+	clear: both;
+	border-top-style: solid;
+	padding-top: 10px;
+	font-size: 80%;
+}
+
+.footnotes {
+	border-top-style: solid;
+	border-top-width: 1px;
+}
+
+.float-left {
+	float: left;
+}
+
+.middle {
+	text-align: center;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.float-right {
+	float: right;
+}
+.entry-date {
+  text-align: right;
+  color: #333;
+}
+

@@ -1,0 +1,33 @@
+/* @override http://anonymanykterister.se/style/blogg.css */
+
+body {
+	color: #3b120a;
+}
+
+a {
+	color: #3b120a;
+}
+
+#search input[type=text]:focus {
+  color: #330805;
+}
+
+#search input[type=text]:focus, #search input[type=submit], #footer, #footer a {
+  color: #330805;
+}
+
+#link-blogg {
+	color: #fff;
+	background-color: #330805;
+}
+
+#side {
+	float: left;
+	clear: none;
+}
+
+#content {
+	float: right;
+	width: 600px;
+	clear: right;
+}

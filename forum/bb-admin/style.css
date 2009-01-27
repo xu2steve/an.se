@@ -1,0 +1,834 @@
+/*
+Copyright (c) 2008, Yahoo! Inc. All rights reserved.
+Code licensed under the BSD License:
+http://developer.yahoo.net/yui/license.txt
+version: 2.5.1
+*/
+html{color:#000;background:#FFF;}
+body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,code,form,fieldset,legend,input,textarea,p,blockquote,th,td{margin:0;padding:0;}
+table{border-collapse:collapse;border-spacing:0;}
+fieldset,img{border:0;}
+address,caption,cite,code,dfn,em,strong,th,var{font-style:normal;font-weight:normal;}
+li{list-style:none;}
+caption,th{text-align:left;}
+h1,h2,h3,h4,h5,h6{font-size:100%;font-weight:normal;}
+q:before,q:after{content:'';}
+abbr,acronym {border:0;font-variant:normal;}
+sup {vertical-align:text-top;}
+sub {vertical-align:text-bottom;}
+input,textarea,select{font-family:inherit;font-size:inherit;font-weight:inherit;}
+input,textarea,select{*font-size:100%;}
+legend{color:#000;}
+body {font:13px/1.231 arial,helvetica,clean,sans-serif;*font-size:small;*font:x-small;}
+table {font-size:inherit;font:100%;}
+pre,code,kbd,samp,tt{font-family:monospace;*font-size:108%;line-height:100%;}
+
+/*
+There are six graduations of green
+	         Dark - rgb(5, 50, 0)
+	          Mid - rgb(10, 100, 0)
+	         Link - rgb(40, 140, 60)
+	        Light - rgb(110, 180, 105)
+	Input Borders - rgb(180, 220, 170)
+	    Highlight - rgb(200, 250, 200)
+
+One deep yellow
+		   Yellow - rgb(230, 145, 0)
+*/
+
+html {
+	height: 100%;
+}
+
+body.bbAdmin {
+	height: 100%;
+	font: normal normal normal 0.625em/normal 'Lucida Grande', 'Lucida Sans Unicode', Tahoma, Verdana, sans-serif;
+}
+
+strong {
+	font-weight: bold;
+}
+
+#bbWrap {
+	position: relative;
+	min-height: 100%;
+}
+
+#bbContent {
+	padding-bottom: 9.5em;
+}
+
+#bbFooter {
+	position: relative;
+	height: 5.9em;
+	margin-top: -7.5em;
+	padding: 1.6em 0 0 6em;
+	background-color: rgb(70, 70, 70);
+	background-image: url('images/admin-footer-logo.gif');
+	background-repeat: no-repeat;
+	background-position: 2em 1em;
+	color: rgb(153, 153, 153);
+	line-height: 1.8em;
+	clear: both;
+}
+
+#bbFooter p {
+	font-size: 1.2em;
+	clear: both;
+}
+
+#bbFooter p a {
+	color: rgb(255, 255, 255);
+	text-decoration: none;
+}
+
+#bbFooter p a:hover {
+	text-decoration: underline;
+}
+
+#bbHead {
+	border-top: 3em solid rgb(5, 50, 0);
+	background-color: rgb(10, 100, 0);
+	color: rgb(200, 250, 200);
+	height: 6.8em;
+}
+
+#bbHead h1 {
+	float: left;
+	font-size: 3.6em;
+	font-family: Georgia, 'Times New Roman', Times, serif;
+	padding: 0.32em 0 0 0.35em;
+	margin: 0px;
+}
+
+#bbVisitSite {
+	float: left;
+	margin: 2.3em 0 0 1em;
+}
+
+#bbVisitSite a {
+	padding: 0.3em 0.4em;
+	display: block;
+	background-color: rgb(110, 180, 105);
+	color: rgb(255, 255, 255);
+	text-decoration: none;
+	-moz-border-radius: 0.3em;
+	-khtml-border-radius: 0.3em;
+	-webkit-border-radius: 0.3em;
+	border-radius: 0.3em;
+	border: 0.1em solid rgb(5, 50, 0);
+}
+
+#bbVisitSite a span {
+	font-size: 1.2em;
+}
+
+#bbVisitSite a:hover {
+	color: rgb(5, 50, 0);
+}
+
+#bbUserMenu {
+	position: absolute;
+	top: 0.8em;
+	right: 1.5em;
+	height: 2.2em;
+	line-height: 2.2em;
+}
+
+#bbUserMenu p {
+	color: rgb(204, 204, 204);
+	font-size: 1.1em;
+}
+
+#bbUserMenu p a {
+	color: rgb(255, 255, 255);
+	text-decoration: none;
+}
+
+#bbUserMenu p a:hover {
+	text-decoration: underline;
+}
+
+#bbAdminDashboardMenu {
+	position: absolute;
+	top: 0.7em;
+	left: 0.9em;
+	line-height: 2.5em;
+}
+
+#bbAdminDashboardMenu li {
+	display: inline;
+}
+
+#bbAdminDashboardMenu li a {
+	color: rgb(200, 250, 200);
+	text-decoration: none;
+	line-height: 1.2em;
+	padding: 0.6em;
+	-moz-border-radius-topleft: 0.3em;
+	-moz-border-radius-topright: 0.3em;
+	-khtml-border-top-left-radius: 0.3em;
+	-khtml-border-top-right-radius: 0.3em;
+	-webkit-border-top-left-radius: 0.3em;
+	-webkit-border-top-right-radius: 0.3em;
+	border-top-left-radius: 0.3em;
+	border-top-right-radius: 0.3em;
+}
+
+#bbAdminDashboardMenu li a span {
+	font-size: 1.1em;
+}
+
+#bbAdminDashboardMenu li a:hover {
+	color: rgb(255, 255, 255);
+}
+
+#bbAdminDashboardMenu li.current a {
+	background-color: rgb(10, 100, 0);
+}
+
+#bbAdminMainMenu {
+	background-color: rgb(10, 100, 0);
+	border-bottom: 0.1em solid rgb(5, 50, 0);
+	padding-left: 1.1em;
+	height: 3em;
+}
+
+#bbAdminMainMenu li {
+	display: inline;
+	margin-right: 0.1em;
+	margin-top: 0.2em;
+}
+
+#bbAdminMainMenu li a {
+	color: rgb(200, 250, 200);
+	text-decoration: none;
+	line-height: 3em;
+	padding: 1em 0.7em 0.8em 0.7em;
+	-moz-border-radius-topleft: 0.33em;
+	-moz-border-radius-topright: 0.33em;
+	-khtml-border-top-left-radius: 0.4em;
+	-khtml-border-top-right-radius: 0.4em;
+	-webkit-border-top-left-radius: 0.4em;
+	-webkit-border-top-right-radius: 0.4em;
+	border-top-left-radius: 0.4em;
+	border-top-right-radius: 0.4em;
+}
+
+#bbAdminMainMenu li a span {
+	font-size: 1.6em;
+}
+
+#bbAdminMainMenu li a:hover {
+	color: rgb(230, 145, 0);
+}
+
+#bbAdminMainMenu li.current a {
+	color: rgb(230, 145, 0);
+	background-color: rgb(255, 255, 255);
+	border: 0.1em solid rgb(5, 50, 0);
+	padding-right: 0.6em;
+	padding-left: 0.6em;
+	border-bottom-width: 0;
+	font-weight: bold;
+}
+
+#bbAdminSideMenu {
+	float: right;
+	margin-top: -2.8em;
+	margin-right: 1.5em;
+}
+
+#bbAdminSideMenu li {
+	display: inline;
+}
+
+#bbAdminSideMenu li a {
+	color: rgb(200, 250, 200);
+	text-decoration: none;
+	line-height: 2.6em;
+	padding: 0.8em 0.6em 0.9em 0.6em;
+	-moz-border-radius-topleft: 0.3em;
+	-moz-border-radius-topright: 0.3em;
+	-khtml-border-top-left-radius: 0.4em;
+	-khtml-border-top-right-radius: 0.4em;
+	-webkit-border-top-left-radius: 0.4em;
+	-webkit-border-top-right-radius: 0.4em;
+	border-top-left-radius: 0.4em;
+	border-top-right-radius: 0.4em;
+}
+
+#bbAdminSideMenu li a span {
+	font-size: 1.2em;
+}
+
+#bbAdminSideMenu li a:hover {
+	color: rgb(230, 145, 0);
+}
+
+#bbAdminSideMenu li.current a {
+	color: rgb(230, 145, 0);
+	background-color: rgb(255, 255, 255);
+	border: 0.1em solid rgb(5, 50, 0);
+	padding-right: 0.6em;
+	padding-left: 0.6em;
+	border-bottom-width: 0;
+	font-weight: bold;
+}
+
+#bbAdminSubMenu {
+	margin-top: 1.1em;
+	margin-left: 1.7em;
+	margin-bottom: 0.8em;
+}
+
+#bbAdminSubMenu li {
+	display: inline;
+	margin-right: 1.8em;
+}
+
+#bbAdminSubMenu li a {
+	text-decoration: none;
+	color: rgb(40, 140, 60);
+	line-height: 1.6em;
+}
+
+#bbAdminSubMenu li a span {
+	font-size: 1.4em;
+}
+
+#bbAdminSubMenu li a:hover {
+	color: rgb(230, 145, 0);
+}
+
+#bbAdminSubMenu li.current a {
+	color: rgb(230, 145, 0);
+}
+
+
+
+
+
+
+
+
+#bbBody {
+	color: rgb(51, 51, 51);
+}
+
+#bbBody a {
+	color: rgb(40, 140, 60);
+}
+
+#bbBody a:hover {
+	color: rgb(230, 145, 0);
+}
+
+div.updated,
+div.error,
+div.wrap {
+	margin: 0 1.5em;
+	max-width: 98em;
+}
+
+div.updated,
+div.error {
+	border-width: 0.1em;
+	border-style: solid;
+	padding: 1.5em;
+	margin-bottom: 1em;
+	max-width: 94.8em;
+}
+
+div.updated {
+	background-color: #ffffe0;
+	border-color: rgb(230, 219, 85);
+}
+
+div.error {
+	background-color: #ffebe8;
+	border-color: #c00;
+}
+
+iframe.error {
+	margin: 0 0 1em 0;
+	height: 70px;
+	width: 100%;
+	background-color: #ffebe8;
+	border: 0.1em dotted #c00;
+}
+
+div.updated p,
+div.error p {
+	line-height: 1.1em;
+	font-size: 1.3em;
+}
+
+div.updated a,
+div.error a {
+	color: rgb(40, 140, 60);
+	text-decoration: none;
+}
+
+div.updated a:hover,
+div.error a:hover {
+	color: rgb(230, 145, 0);
+}
+
+#bbBody h2 {
+	border-bottom: 0.05em solid rgb(218, 218, 218);
+	font-size: 2.4em;
+	font-family: Georgia, 'Times New Roman', Times, serif;
+	color: rgb(90, 90, 90);
+	padding: 0.24em 0 0.3em 0;
+	margin-left: -0.2em;
+	clear: both;
+}
+
+#bbBody h2.after {
+	margin-top: 1.6em;
+}
+
+#bbBody h3 {
+	font-size: 1.5em;
+	font-weight: bold;
+	padding: 1em 0;
+	color: rgb(51, 51, 51);
+}
+
+#bbBody p {
+	font-size: 1.3em;
+	margin: 1em 0;
+}
+
+#bbBody p code {
+	font-size: 1.2em;
+}
+
+.widefat {
+	border-width: 0.12em;
+	border-style: solid;
+	border-collapse: collapse;
+	width: 100%;
+	clear: both;
+}
+
+.widefat {
+	border-color: #ccc;
+}
+
+.widefat a {
+	text-decoration: none;
+}
+
+.widefat th {
+	font-weight: bold;
+}
+
+.widefat td,
+.widefat th {
+	border-bottom-width: 0.1em;
+	border-bottom-style: solid;
+	border-bottom-color: #ccc;
+	font-size: 1.2em;
+	padding: 1em 1em 2em;
+	vertical-align: text-top;
+}
+
+.widefat th {
+	padding-bottom: 8px;
+	padding-top: 10px;
+	text-align: left;
+}
+
+.widefat thead, .widefat .thead {
+	background-color: #464646;
+	color: #d7d7d7;
+}
+
+#bbBody .widefat td p {
+	font-size: 1em;
+	margin: 0;
+}
+
+.widefat cite {
+	font-style: italic;
+}
+
+form.settings fieldset {
+	margin-top: 1.3em;
+	border-bottom: 0.1em solid rgb(218, 218, 218);
+}
+
+form.settings fieldset.submit {
+	margin-top: 0;
+	border-bottom-width: 0;
+}
+
+form.settings legend {
+	font-size: 1.5em;
+	font-weight: bold;
+	padding: 1em 0;
+	color: rgb(51, 51, 51);
+}
+
+form.settings div {
+	background-color: rgb(200, 250, 200);
+	padding: 1em;
+	margin-bottom: 0.8em;
+}
+
+form.settings div label {
+	position: absolute;
+	width: 16em;
+	font-size: 1.3em;
+	font-weight: bold;
+}
+
+form.settings div div {
+	margin: 0 0 0 22em;
+	padding: 0;
+}
+
+form.settings div input,
+form.settings div select {
+	color: rgb(0, 0, 0);
+	font-size: 1.3em;
+	border: 0.08em solid rgb(180, 220, 170);
+}
+
+form.settings div input.text {
+	color: rgb(0, 0, 0);
+	font-size: 1.3em;
+	padding: 0.25em;
+	margin: 0;
+	width: 30%;
+}
+
+form.settings div input.text.long {
+	width: 90%;
+}
+
+form.settings div input.text.short {
+	width: 10%;
+}
+
+#bbBody form.settings div p {
+	margin: 0.8em 0 0.2em 0;
+}
+
+pre.block {
+	margin: 0.2em;
+	padding: 1em;
+	line-height: 1.4em;
+	font-size: 1.3em;
+	display: block;
+	border: 1px dotted rgb(51, 51, 51);
+	background-color: rgb(218, 218, 218);
+	overflow: auto;
+	overflow-y: hidden;
+}
+
+table.block {
+	font-family:monospace;
+	margin: 0.2em;
+	padding: 1em;
+	display: block;
+	border: 1px dotted rgb(51, 51, 51);
+	background-color: rgb(218, 218, 218);
+}
+
+table.block th {
+	border-bottom: 1px solid rgb(51, 51, 51);
+}
+
+table.block th,
+table.block td {
+	line-height: 1.4em;
+	font-size: 1.3em;
+	padding: 0.4em 3em 0.4em 0.4em;
+}
+
+#bbBody form.settings div p.gravatarRating {
+	clear: both;
+	width: 60%;
+	padding-top: 0.4em;
+}
+
+p.gravatarDefault {
+	line-height: 30px;
+}
+
+p.gravatarDefault img {
+	vertical-align: top;
+	height:30px;
+	width:30px;
+	margin-right:1em;
+	border: 1px solid rgb(110, 180, 105);
+}
+
+p.gravatarRating img {
+	height:30px;
+	width:30px;
+	float:left;
+	margin-right:1em;
+	border: 1px solid rgb(110, 180, 105);
+}
+
+form.settings input.submit {
+	font-size: 1.3em;
+	padding: 0.3em 0.4em;
+	color: rgb(40, 140, 60);
+	background-color: rgb(229, 229, 229);
+	border: 0.08em solid rgb(163, 163, 163);
+	margin-top: 1.6em;
+	-moz-border-radius: 0.25em;
+	-khtml-border-radius: 0.25em;
+	-webkit-border-radius: 0.25em;
+	border-radius: 0.25em;
+}
+
+form.settings input.submit:hover {
+	border-color: rgb(83, 83, 83);
+	color: rgb(230, 145, 0);
+}
+
+div.theme-list {
+	width: 848px;
+	margin: 30px auto;
+	border-top: 1px solid rgb(204, 204, 204);
+	border-bottom: 1px solid rgb(204, 204, 204);
+	border-right: 1px solid rgb(255, 255, 255);
+}
+
+div.clear {
+	clear: both;
+	height: 0;
+}
+
+ul.theme-list li {
+	float: left;
+	width: 242px;
+	height: 330px;
+	overflow: hidden;
+	padding: 20px;
+	border-bottom: 1px solid rgb(238, 238, 238);
+	border-right: 1px solid rgb(238, 238, 238);
+}
+
+ul.theme-list li:nth-child(3n),
+ul.theme-list li:last-child {
+	border-right: none;
+}
+
+ul.theme-list li:nth-last-child(-n+3) {
+	border-bottom-color: rgb(255, 255, 255);
+}
+
+ul.theme-list li div.screen-shot {
+	border: 1px solid rgb(204, 204, 204);
+	width: 240px;
+	height: 180px;
+}
+
+ul.theme-list li div.screen-shot img {
+	width: 240px;
+	height: 180px;
+}
+
+#bbBody ul.theme-list li div.description h3 {
+	padding-bottom: 0;
+}
+
+ul.theme-list li div.description small.version,
+ul.theme-list li div.description small.author {
+	display: none;
+}
+
+ul.theme-list li div.description p {
+	font-size: 1.2em;
+}
+
+ul.theme-list li div.description small.location {
+	display: none;
+}
+
+ul.theme-list.active {
+	margin: 15px 0;
+	background-color: transparent;
+}
+
+ul.theme-list.active li {
+	width: auto;
+	height: auto;
+	margin: 0 0 20px;
+	padding: 0;
+	border: none;
+}
+
+ul.theme-list.active li div.screen-shot {
+	border: 1px solid rgb(102, 102, 102);
+	width: 150px;
+	height: 112px;
+	float: left;
+	margin-right: 15px;
+}
+
+ul.theme-list.active li div.screen-shot img {
+	width: 150px;
+	height: 112px;
+}
+
+ul.theme-list.active li div.description {
+	float: left;
+}
+
+#bbBody ul.theme-list.active li div.description h3 {
+	margin-top: 0;
+	padding: 0;
+	font-size: 1.7em;
+}
+
+#bbBody ul.theme-list.active li div.description h3 a {
+	color: inherit;
+	text-decoration: none;
+	font-weight: normal;
+}
+
+ul.theme-list.active li div.description small.version,
+ul.theme-list.active li div.description small.author {
+	display: inline;
+	font-size: 1.1em;
+}
+
+ul.theme-list.active li div.description p {
+	font-size: 1.4em;
+}
+
+ul.theme-list.active li div.description small.location {
+	display: inline;
+	font-size: 1.1em;
+}
+
+div.post-theme {
+	clear: both;
+	height: 30px;
+}
+
+/* Layout classes */
+
+.absleft {
+	position: absolute;
+	left: 0;
+}
+
+.absright {
+	position: absolute;
+	right: 0;
+}
+
+.abstop {
+	position: absolute;
+	top: 0;
+}
+
+.posrel {
+	position: relative;
+}
+
+.alignleft {
+	float: left;
+}
+
+.alignright {
+	float: right;
+}
+
+.alternate, .alt {
+	background: #f1f1f1;
+}
+
+.active {
+	background-color: rgb(200, 250, 200);
+}
+
+.hidden {
+	display: none;
+}
+
+.helper {
+	border: 2px dashed #777;
+}
+
+.sort-handle {
+	cursor: move;
+}
+
+/* List Blocks */
+
+ul.list-block {
+	margin: 0;
+	padding: 0 0 0 3em;
+	background-color: #fff;
+}
+
+ul#the-list.list-block, ul#forum-list.list-block {
+	padding: 0;
+}
+
+li.list-block {
+	list-style: none;
+	margin: 0;
+	padding: 8px 0 0;
+}
+
+div.list-block {
+	padding: 0 8px 8px;
+}
+
+/* Dashboard */
+
+#bbBody div.dashboard {
+	border: 0.1em solid rgb(218, 218, 218);
+	padding: 0.2em;
+	margin-top: 1em;
+}
+
+#bbBody div.dashboard.left {
+	width: 48%;
+	float: left;
+}
+
+#bbBody div.dashboard.right {
+	width: 48%;
+	float: left;
+	margin-left: 2%;
+}
+
+#bbBody div.dashboard h3 {
+	margin: 0;
+	padding: 0 0.6em;
+	font-size: 1.4em;
+	line-height: 2;
+	background-color: rgb(200, 250, 200);
+	clear: none;
+}
+
+#bbBody div#dashboard-right-now h3 {
+	color: rgb(255, 255, 255);
+	background-color: rgb(10, 100, 0);
+}
+
+#bbBody div.dashboard p {
+	margin: 0.8em;
+	font-size: 1.3em;
+}
+
+#bbBody div.dashboard ul {
+	margin: 0.8em;
+	font-size: 1.3em;
+}
+
+#bbBody div.dashboard ul li {
+	margin-bottom: 0.6em;
+}

@@ -1,0 +1,143 @@
+body {
+	text-align: justify;
+	font-family: "Lucida Grande", Lucida, Verdana, sans-serif;
+}
+
+p {
+	margin-top: 1em;
+	margin-bottom: 1em;
+}
+
+a {
+	color: #000;
+}
+
+hr {
+	height: 2px;
+	background-color: #000;
+	border-style: none;
+}
+
+input.text {
+	color: #808080;
+}
+
+input.text:focus {
+	color: #000;
+}
+
+#container {
+	width: 900px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#header h1 {
+	text-transform: uppercase;
+	text-align: center;
+	text-decoration: none;
+	font: small-caps 450% Georgia, "Times New Roman", Times, serif;
+	margin-bottom: 0;
+	margin-top: 0;
+}
+
+#header h1 a {
+	text-decoration: none;
+}
+
+#navbar {
+	margin-bottom: 5px;
+	font-family: "Helvetica Neue", Arial, Helvetica, Geneva, sans-serif;
+}
+
+#navbar ul {
+	list-style-type: none;
+	text-transform: uppercase;
+	padding: 0;
+	display: inline;
+	margin: 0 0 10px;
+}
+
+#navbar li {
+	display: inline;
+	padding: 2px 5px;
+	margin-right: 10px;
+}
+
+#navbar li a {
+	text-decoration: none;
+	color: #000;
+}
+
+#navbar li.selected {
+	background-color: #000;
+}
+
+#navbar li.selected a {
+	background-color: #000;
+	color: #fff;
+}
+
+#search {
+	width: 280px;
+	float: right;
+	text-align: right;
+	height: 30px;
+}
+
+#search input.text {
+	width: 227px;
+	font-size: 1em;
+	padding: 0;
+	margin: 0;
+}
+
+#search input.submit {
+	font-size: 1em;
+	width: 43px;
+}
+
+#content {
+	font-size: 80%;
+}
+
+#main {
+	width: 600px;
+	padding-right: 10px;
+}
+
+#side {
+	width: 280px;
+	float: right;
+	clear: right;
+}
+
+#newsletter {
+	font-weight: bold;
+}
+
+#newsletter input.text {
+	width: 182px;
+}
+
+#newsletter input.submit {
+	width: 88px;
+}
+
+img {
+	max-width: 650px;
+}
+
+.float-left {
+	float: left;
+}
+
+.middle {
+	text-align: center;
+	margin-right: auto;
+	margin-left: auto;
+}
+
+.float-right {
+	float: right;
+}

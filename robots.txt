@@ -1,0 +1,4 @@
+# go away
+User-Agent: *
+Disallow: /
+Sitemap: http://anonymanykterister.se/sitemap.xml

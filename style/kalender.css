@@ -1,0 +1,21 @@
+/* @override http://anonymanykterister.se/style/kalender.css */
+
+body {
+	color: #29375e;
+}
+
+a {
+	color: #29375e;
+}
+
+#search input[type=text] {
+  color: #15264d;
+}
+#search input[type=text]:focus, #search input[type=submit], #footer, #footer a {
+  color: #15264d;
+}
+
+#link-kalender {
+	color: #fff;
+	background-color: #29375e;
+}
