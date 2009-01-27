@@ -27,7 +27,39 @@
 		
 		function scrolled() {
 			clearTimeout(timer)
-			timer = setTimeout("animateBg", 500);
+			timer = setTimeout("animateBg()", 500);
+		}
+		
+		function animateBg() {
+ 			var endTop = ((getScrollHeight() / (pageHeight - windowHeight) * pageHeight) + 100);
+ 			if (endTop > (parseInt($('wine').getStyle('top')))) {
+	 			var endHeight = (pageHeight - endTop);
+				$('wine').morph('top:' + endTop + 'px; height:' + endHeight + 'px;');
+			}
+		}
+		
+		function fixHeight(id) {
+			$(id).setStyle({
+				display: 'block'
+			});
+			var top = parseInt($(id).getStyle('top'));
+			$(id).setStyle({
+				height: ((pageHeight - top) + 'px'),
+			});
+		}
+		
+		function getScrollHeight() {
+			if( typeof( window.pageYOffset ) == 'number' ) {
+ 			  //Netscape compliant
+ 			  scrOfY = window.pageYOffset;
+ 			} else if( document.body && document.body.scrollTop ) {
+ 			  //DOM compliant
+ 			  scrOfY = document.body.scrollTop;
+ 			} else if( document.documentElement && document.documentElement.scrollTop ) {
+ 			  //IE6 standards compliant mode
+ 			  scrOfY = document.documentElement.scrollTop;
+ 			}
+ 			return scrOfY
 		}
 		
 		function getWindowHeight() {
@@ -43,34 +75,6 @@
 	 			}
 		}
 		
-		function animateBg() {
- 			var scrOfY = 0;
- 			if( typeof( window.pageYOffset ) == 'number' ) {
- 			  //Netscape compliant
- 			  scrOfY = window.pageYOffset;
- 			} else if( document.body && document.body.scrollTop ) {
- 			  //DOM compliant
- 			  scrOfY = document.body.scrollTop;
- 			} else if( document.documentElement && document.documentElement.scrollTop ) {
- 			  //IE6 standards compliant mode
- 			  scrOfY = document.documentElement.scrollTop;
- 			}
- 			
- 			var endTop = ((scrOfY / (pageHeight - windowHeight) * pageHeight) + 100);
- 			var endHeight = (pageHeight - endTop);
-			$('wine').morph('top:' + endTop + 'px; height:' + endHeight + 'px;');
-		}
-		
-		function fixHeight(id) {
-			$(id).setStyle({
-				display: 'block'
-			});
-			var top = parseInt($(id).getStyle('top'));
-			$(id).setStyle({
-				height: ((pageHeight - top) + 'px'),
-			});
-		}
-		
 		function getPageHeight(){
 			if (window.innerHeight && window.scrollMaxY) {// Firefox
 				pageHeight = window.innerHeight + window.scrollMaxY;
@@ -82,7 +86,7 @@
 		 }
  	</script>
 </head>
-<body id="body" onload="setupZoom();activatePlaceholders();getPageHeight();fixHeight('wine');getWindowHeight()" onscroll="scrolled()">
+<body id="body" onload="setupZoom();activatePlaceholders();getPageHeight();fixHeight('wine');getWindowHeight()" onscroll="animateBg()">
 	<div id="rightbg"></div>
 	<div id="bottle"></div>
 	<div id="leftbg"></div>

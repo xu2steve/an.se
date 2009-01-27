@@ -105,7 +105,9 @@ blockquote {
 	display: none;
 	position: absolute;
 	z-index: -10;
-	width: 100%;
+	width: 1000px;
+	left: 50%;
+	margin-left: -500px;
 	height: 300px;
 	top: 100px;
 	overflow: hidden;
