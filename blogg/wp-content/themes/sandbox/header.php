@@ -26,10 +26,10 @@
 		window.onresize = windowHeight;
 		
 		function scrolled() {
-			clearTimeout(timer)
-			timer = setTimeout("animateBg()", 500);
+			clearTimeout(timer);
+			timer = setTimeout("animateBg()", 1000);
 		}
-		
+
 		function animateBg() {
  			var endTop = ((getScrollHeight() / (pageHeight - windowHeight) * pageHeight) + 100);
  			if (endTop > (parseInt($('wine').getStyle('top')))) {
@@ -86,7 +86,7 @@
 		 }
  	</script>
 </head>
-<body id="body" onload="setupZoom();activatePlaceholders();getPageHeight();fixHeight('wine');getWindowHeight()" onscroll="animateBg()">
+<body id="body" onload="setupZoom();activatePlaceholders();getPageHeight();fixHeight('wine');getWindowHeight()" onscroll="scrolled()">
 	<div id="rightbg"></div>
 	<div id="bottle"></div>
 	<div id="leftbg"></div>
