@@ -20,12 +20,6 @@
 			</dict>
 			<dict>
 				<key>DocumentURL</key>
-				<string>file://localhost/Users/pontus/Dropbox/www/blogg/wp-content/themes/sandbox/header.php</string>
-				<key>StateType</key>
-				<string>DefaultTab</string>
-			</dict>
-			<dict>
-				<key>DocumentURL</key>
 				<string>file://localhost/Users/pontus/Dropbox/www/blogg/wp-content/themes/sandbox/footer.php</string>
 				<key>StateType</key>
 				<string>DefaultTab</string>

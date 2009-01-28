@@ -31,7 +31,9 @@
 		}
 
 		function animateBg() {
- 			var endTop = ((getScrollHeight() / (pageHeight - windowHeight) * pageHeight) + 100);
+ 			var endTop = parseInt(getScrollHeight() / (pageHeight - windowHeight) * pageHeight) + 100;
+ 			if (endTop > pageHeight) 
+ 				endTop = pageHeight;
  			if (endTop > (parseInt($('wine').getStyle('top')))) {
 	 			var endHeight = (pageHeight - endTop);
 				$('wine').morph('top:' + endTop + 'px; height:' + endHeight + 'px;');
@@ -86,13 +88,13 @@
 		 }
  	</script>
 </head>
-<body id="body" onload="setupZoom();activatePlaceholders();getPageHeight();fixHeight('wine');getWindowHeight()" onscroll="scrolled()">
+<body id="body" onload="setupZoom();activatePlaceholders();getPageHeight();getWindowHeight();fixHeight('wine')" onscroll="scrolled()" onresize="getWindowHeight();scrolled()">
 	<div id="rightbg"></div>
 	<div id="bottle"></div>
 	<div id="leftbg"></div>
 	<div id="wine">
-		<div id="surface"></div>
-		<div id="depth"></div>
+		<!--<div id="surface"></div>
+		<div id="depth"></div>-->
 	</div>
 				<div id="BIGcontainer">
 					<div id="header">
