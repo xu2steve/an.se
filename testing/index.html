@@ -1,26 +1,126 @@
 <html>
 	<head>
-	<style type="text/css">
-	* {
-		margin: 0;
-		padding: 0;}
-	#stupid {
-		background-color: black;
-		height: 300px;
-		width: 300px;
-		overflow: hidden;
-	} 
+		<script src="/js-global/prototype.js" type="text/javascript"></script>
+	<script src="/js-global/scriptaculous.js?load=effects" type="text/javascript"></script>
+	<script language="javascript" type="text/javascript">
+		var timer = setTimeout("animateBg()", 1000);
+		var windowHeight = 0;
+		var pageHeight = 0;
 		
-	#stupidchild {
-		background-color: green;
-		height: 500px;
-		width: 300px;
-	}
+		window.onresize = windowHeight;
+		
+		function scrolled() {
+			clearTimeout(timer)
+			timer = setTimeout("animateBg()", 500);
+		}
+		
+		function animateBg() {
+ 			var endTop = ((getScrollHeight() / (pageHeight - windowHeight) * pageHeight) + 100);
+ 			if (endTop > (parseInt($('wine').getStyle('top')))) {
+	 			var endHeight = (pageHeight - endTop);
+				$('wine').morph('top:' + endTop + 'px;')// height:' + endHeight + 'px;');
+			}
+		}
+		
+		function fixHeight(id) {
+			$(id).setStyle({
+				display: 'block'
+			});
+			var top = parseInt($(id).getStyle('top'));
+			$(id).setStyle({
+				height: ((pageHeight - top) + 'px'),
+			});
+		}
+		
+		function getScrollHeight() {
+			if( typeof( window.pageYOffset ) == 'number' ) {
+ 			  //Netscape compliant
+ 			  scrOfY = window.pageYOffset;
+ 			} else if( document.body && document.body.scrollTop ) {
+ 			  //DOM compliant
+ 			  scrOfY = document.body.scrollTop;
+ 			} else if( document.documentElement && document.documentElement.scrollTop ) {
+ 			  //IE6 standards compliant mode
+ 			  scrOfY = document.documentElement.scrollTop;
+ 			}
+ 			return scrOfY
+		}
+		
+		function getWindowHeight() {
+			if( typeof( window.innerWidth ) == 'number' ) {
+	 			  //Non-IE
+	 			  windowHeight = window.innerHeight;
+	 			} else if( document.documentElement && document.documentElement.clientHeight ) {
+	 			  //IE 6+ in 'standards compliant mode'
+	 			  windowHeight = document.documentElement.clientHeight;
+	 			} else if( document.body && document.body.clientHeight ) {
+	 			  //IE 4 compatible
+	 			  windowHeight = document.body.clientHeight;
+	 			}
+		}
+		
+		function getPageHeight(){
+			if (window.innerHeight && window.scrollMaxY) {// Firefox
+				pageHeight = window.innerHeight + window.scrollMaxY;
+			} else if (document.body.scrollHeight > document.body.offsetHeight){ // all but Explorer Mac
+				pageHeight = document.body.scrollHeight;
+			} else { // works in Explorer 6 Strict, Mozilla (not FF) and Safari
+				pageHeight = document.body.offsetHeight;
+		  	}
+		 }
+		 
+		 var timer2;
+		 
+		 function waitLonger() {
+		 	clearTimeout(timer2)
+		 	timer2 = setTimeout("scream()", 5000) 
+		 }
+		 
+		 function scream() {
+		 	alert("It's been 5 seconds since you stopped scrolling")
+		 }
+		 
+ 	</script>
+	<style type="text/css">
+		#wine {
+			position: absolute;
+			z-index: 10;
+			width: 1000px;
+			height: 300px;
+			top: 100px;
+			overflow: hidden;
+			background-color: black;
+		}
+		
+		#surface {
+			background-repeat: repeat-x;
+			height: 10px;
+			z-index: -5;
+			width: 1000px;
+			background-image: url(/images-global/Wine-surface.png);
+		}
+		
+		#depth {
+			background-color: #800020;
+			height: 1000px;
+			width: 1000px;
+			z-index: -5;
+		}
+		
+		#push {
+			height: 3000px;
+			width:  500px;
+		}
 	</style>
 	</head>
-	<body>
-	<div id="stupid">
-		<div id="stupidchild"></div>
+	<body onload="getPageHeight();getWindowHeight()" onscroll="waitLonger()">
+	<div id="wine">
+	<button type="button">hklsahjfkl</button>
+		<!--<div id="surface"></div>
+		<div id="depth"></div>-->
+	</div>
+	<div id="push">
+	
 	</div>
 	</body>
 </html>
