@@ -18,7 +18,6 @@ if(defined('DOING_CRON')) {
 $mutex_filename = 'wp_cache_mutex.lock';
 $new_cache = false;
 
-
 // Don't change variables behind this point
 
 $plugins = glob( WPCACHEHOME . 'plugins/*.php' );
@@ -52,6 +51,8 @@ if ($cache_compression) {
 	$wp_cache_gzip_encoding = gzip_accepted();
 }
 
+add_cacheaction( 'wp_cache_key', 'wp_cache_check_mobile' );
+
 $key = $blogcacheid . md5( do_cacheaction( 'wp_cache_key', $_SERVER['HTTP_HOST'].preg_replace('/#.*$/', '', str_replace( '/index.php', '/', $_SERVER['REQUEST_URI'] ) ).$wp_cache_gzip_encoding.wp_cache_get_cookies_values() ) );
 
 $cache_filename = $file_prefix . $key . '.html';
@@ -70,6 +71,7 @@ if( file_exists( $cache_file ) && ($mtime = @filemtime($meta_pathname)) ) {
 			array_push($meta->headers, 'Content-Encoding: ' . $wp_cache_gzip_encoding);
 			array_push($meta->headers, 'Vary: Accept-Encoding, Cookie');
 			array_push($meta->headers, 'Content-Length: ' . filesize( $cache_file ) );
+			wp_cache_debug( "Had to add gzip headers to the page {$_SERVER[ 'REQUEST_URI' ]}." );
 		}
 		foreach ($meta->headers as $header) {
 			// godaddy fix, via http://blog.gneu.org/2008/05/wp-supercache-on-godaddy/ and http://www.littleredrails.com/blog/2007/09/08/using-wp-cache-on-godaddy-500-error/
@@ -129,6 +131,39 @@ function do_cacheaction( $action, $value = '' ) {
 	}
 
 	return $value;
+}
+
+// From http://wordpress.org/extend/plugins/wordpress-mobile-edition/ by Alex King
+function wp_cache_check_mobile( $cache_key ) {
+	global $wp_cache_mobile_enabled, $wp_cache_mobile_browser, $wp_cache_mobile_browsers;
+	if( !isset( $wp_cache_mobile_enabled ) || false == $wp_cache_mobile_enabled )
+		return $cache_key;
+
+	if (!isset($_SERVER["HTTP_USER_AGENT"])) {
+		return $cache_key;
+	}
+	$whitelist = explode( ',', $wp_cache_mobile_whitelist );
+	foreach ($whitelist as $browser) {
+		if (strstr($_SERVER["HTTP_USER_AGENT"], trim($browser))) {
+			return $cache_key;
+		}
+	}
+
+	$browsers = explode( ',', $wp_cache_mobile_browsers );
+	foreach ($browsers as $browser) {
+		if (strstr($_SERVER["HTTP_USER_AGENT"], trim( $browser ))) {
+			return $cache_key . $browser;
+		}
+	}
+	return $cache_key;
+}
+
+function wp_cache_debug( $message ) {
+	global $wp_cache_debug;
+	if( !isset( $wp_cache_debug ) )
+		return;
+	$message .= "\n\nDisable these emails by commenting out or deleting the line containing\n\$wp_cache_debug in wp-content/wp-cache-config.php on your server.\n";
+	mail( $wp_cache_debug, '[' . addslashes( $_SERVER[ 'HTTP_HOST' ] ) . "] WP Super Cache Debug", $message );
 }
 
 ?>

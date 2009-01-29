@@ -20,7 +20,7 @@
     	<h2>Nyheter</h2>
     	<?php query_posts('category_name=Nyheter&showposts=3'); ?>
     	<?php while (have_posts()) : the_post(); ?>
-    		<div id="post-<?php the_ID() ?>" <?php post_class() ?>>
+    		<div id="excerpt-post-<?php the_ID() ?>" <?php post_class() ?>>
     			<h3 class="entry-title"><a href="<?php the_permalink() ?>" rel="bookmark"><?php the_title() ?></a></h3>
     			<div class="entry-content">
     				<?php the_excerpt(__( 'Read More <span class="meta-nav">&raquo;</span>', 'sandbox' )) ?>

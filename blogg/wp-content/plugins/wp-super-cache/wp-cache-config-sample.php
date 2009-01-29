@@ -47,6 +47,15 @@ $cache_rejected_user_agent = array ( 0 => 'bot', 1 => 'ia_archive', 2 => 'slurp'
 // generated.
 $cache_rebuild_files = 0;
 
+// DEBUG mode. Change this to your email address to be sent debug emails.
+// Remove comment (//) to enable and add back to disable.
+//$wp_cache_debug = "you@example.com";
+
+// Disable the file locking system.
+// If you are experiencing problems with clearing or creating cache files
+// uncommenting this may help.
+//$wp_cache_mutex_disabled = 1;
+
 // Just modify it if you have conflicts with semaphores
 $sem_id = 5419;
 
@@ -54,4 +63,9 @@ if ( '/' != substr($cache_path, -1)) {
 	$cache_path .= '/';
 }
 
+$wp_cache_mobile = 0;
+$wp_cache_mobile_whitelist = 'Stand Alone/QNws';
+$wp_cache_mobile_browsers = '2.0 MMP, 240x320, AvantGo, BlackBerry, Blazer, Cellphone, Danger, DoCoMo, Elaine/3.0, EudoraWeb, hiptop, IEMobile, iPhone, iPod, KYOCERA/WX310K, LG/U990, MIDP-2.0, MMEF20, MOT-V, NetFront, Newt, Nintendo Wii, Nitro, Nokia, Opera Mini, Palm, Playstation Portable, portalmmm, Proxinet, ProxiNet, SHARP-TQ-GX10, Small, SonyEricsson, Symbian OS, SymbianOS, TS21i-10, UP.Browser, UP.Link, Windows CE, WinWAP';
+
+$wp_cache_gzip_first = 0;
 ?>

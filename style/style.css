@@ -18,10 +18,10 @@ TAGS: sandbox, microformats, hcard, hatom, xoxo, widgets, blank slate, starter t
 	padding: 0;
 }
 
-html, body {
-	height: 100%;
+body {
 	text-align: justify;
 	font-family: "Lucida Grande", Lucida, Verdana, sans-serif;
+	background-color: #29375e;
 }
 
 a {
@@ -33,14 +33,8 @@ a:link, a:visited {
 }
 
 a:hover {
-	background-color: #000;
 	color: #fff;
-}
-
-hr {
-	height: 2px;
 	background-color: #000;
-	border-style: none;
 }
 
 img.beta {
@@ -59,9 +53,8 @@ input[type=text]:focus {
 }
 
 blockquote {
-  background: url(/images-global/quote.gif) no-repeat;
-  margin: 0;
-  padding: 0 40px 0 40px;
+	background: url(/images-global/an-quote.gif) no-repeat;
+	padding: 0 40px;
 	font-style: italic;
 }
 
@@ -75,34 +68,16 @@ blockquote {
 	margin-left: -500px;
 }
 
-#rightbg {
-	position: fixed;
-	height: 100%;
-	right: 0;
-	width: 50%;
-	background-color: #e2d8db;
-	margin-right: -499px;
-}
-
-#leftbg {
-	position: fixed;
-	height: 100%;
-	left: 0;
-	width: 50%;
-	background-color: #e2d8db;
-	margin-left: -500px;
-}
-
 #bottleneck {
 	margin-right: auto;
 	margin-left: auto;
 	width: 1000px;
-	height: 700px;
+	height: 1337px;
 	overflow: hidden;
+	margin-top: -60px;
 }
 
 #wine {
-	display: none;
 	position: absolute;
 	z-index: -10;
 	width: 1000px;
@@ -110,8 +85,7 @@ blockquote {
 	margin-left: -500px;
 	height: 0;
 	top: 100px;
-	overflow: hidden;
-	background-color: #800020;
+	overflow: hidden;	
 }
 
 #surface {
@@ -119,7 +93,7 @@ blockquote {
 	height: 10px;
 	z-index: -5;
 	width: 100%;
-	background-image: url(/images-global/Wine-surface.png);
+	background-image: url(/images-global/an-surface.png);
 }
 
 #depth {
@@ -131,10 +105,11 @@ blockquote {
 }
 
 #BIGcontainer {
-	z-index: 0;
 	margin-right: auto;
 	margin-left: auto;
 	width: 900px;
+	position: relative;
+	top: 40px;
 }
 
 #header {
@@ -145,7 +120,7 @@ blockquote {
 #container {
 	padding-right: 50px;
 	padding-left: 50px;
-	background: url(/images-global/AN-repeat.png) repeat-y;
+	background: url(/images-global/an-repeat.png) repeat-y;
 	padding-bottom: 1px;
 }
 

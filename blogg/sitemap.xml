@@ -1,77 +1,71 @@
-<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="http://anonymanykterister.se:3000/blogg/wp-content/plugins/google-sitemap-generator/sitemap.xsl"?><!-- generator="wordpress/2.7" --><!-- sitemap-generator-url="http://www.arnebrachhold.de" sitemap-generator-version="3.1.2" --><!-- generated-on="13 Jan 2009 20:46" --><!-- Debug: Total comment count: 7 --><urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">	<url>
-		<loc>http://anonymanykterister.se:3000/blogg/</loc>
+<?xml version="1.0" encoding="UTF-8"?><?xml-stylesheet type="text/xsl" href="http://81.226.212.45/blogg/wp-content/plugins/google-sitemap-generator/sitemap.xsl"?><!-- generator="wordpress/2.7" --><!-- sitemap-generator-url="http://www.arnebrachhold.de" sitemap-generator-version="3.1.2" --><!-- generated-on="29 Jan 2009 13:12" --><!-- Debug: Total comment count: 7 --><urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">	<url>
+		<loc>http://81.226.212.45/blogg/</loc>
 		<lastmod>2009-01-13T19:45:24+00:00</lastmod>
 		<changefreq>daily</changefreq>
 		<priority>1.0</priority>
 	</url>
 <!-- Debug: Start Postings --><!-- Debug: Priority report of postID 129: Comments: 0 of 7 = 0 points -->	<url>
-		<loc>http://anonymanykterister.se:3000/blogg/2009/01/jag-skriver/</loc>
+		<loc>http://81.226.212.45/blogg/2009/01/jag-skriver/</loc>
 		<lastmod>2009-01-13T19:45:24+00:00</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.2</priority>
 	</url>
 <!-- Debug: Priority report of postID 118: Comments: 0 of 7 = 0 points -->	<url>
-		<loc>http://anonymanykterister.se:3000/blogg/2009/01/hemligt/</loc>
+		<loc>http://81.226.212.45/blogg/2009/01/hemligt/</loc>
 		<lastmod>2009-01-12T12:11:31+00:00</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.2</priority>
 	</url>
 <!-- Debug: Priority report of postID 123: Comments: 0 of 7 = 0 points -->	<url>
-		<loc>http://anonymanykterister.se:3000/blogg/2009/01/info/</loc>
+		<loc>http://81.226.212.45/blogg/2009/01/info/</loc>
 		<lastmod>2009-01-11T17:02:32+00:00</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.2</priority>
 	</url>
 <!-- Debug: Priority report of postID 30: Comments: 3 of 7 = 0.4 points -->	<url>
-		<loc>http://anonymanykterister.se:3000/blogg/2008/11/doda-djur/</loc>
+		<loc>http://81.226.212.45/blogg/2008/11/doda-djur/</loc>
 		<lastmod>2009-01-11T14:49:07+00:00</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.4</priority>
 	</url>
-<!-- Debug: Priority report of postID 112: Comments: 0 of 7 = 0 points -->	<url>
-		<loc>http://anonymanykterister.se:3000/blogg/2009/01/fotnot/</loc>
-		<lastmod>2009-01-11T14:28:12+00:00</lastmod>
-		<changefreq>monthly</changefreq>
-		<priority>0.2</priority>
-	</url>
 <!-- Debug: Priority report of postID 97: Comments: 1 of 7 = 0.1 points -->	<url>
-		<loc>http://anonymanykterister.se:3000/blogg/2008/11/petter/</loc>
+		<loc>http://81.226.212.45/blogg/2008/11/petter/</loc>
 		<lastmod>2008-11-29T17:56:18+00:00</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.2</priority>
 	</url>
 <!-- Debug: Priority report of postID 90: Comments: 0 of 7 = 0 points -->	<url>
-		<loc>http://anonymanykterister.se:3000/blogg/2008/11/checklist/</loc>
+		<loc>http://81.226.212.45/blogg/2008/11/checklist/</loc>
 		<lastmod>2008-11-26T10:08:13+00:00</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.2</priority>
 	</url>
 <!-- Debug: Priority report of postID 87: Comments: 2 of 7 = 0.3 points -->	<url>
-		<loc>http://anonymanykterister.se:3000/blogg/2008/11/mera/</loc>
+		<loc>http://81.226.212.45/blogg/2008/11/mera/</loc>
 		<lastmod>2008-11-26T10:04:16+00:00</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.3</priority>
 	</url>
 <!-- Debug: Priority report of postID 25: Comments: 0 of 7 = 0 points -->	<url>
-		<loc>http://anonymanykterister.se:3000/blogg/2008/11/tankstreck/</loc>
+		<loc>http://81.226.212.45/blogg/2008/11/tankstreck/</loc>
 		<lastmod>2008-11-26T10:01:31+00:00</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.2</priority>
 	</url>
 <!-- Debug: Priority report of postID 60: Comments: 0 of 7 = 0 points -->	<url>
-		<loc>http://anonymanykterister.se:3000/blogg/2008/11/majs/</loc>
+		<loc>http://81.226.212.45/blogg/2008/11/majs/</loc>
 		<lastmod>2008-11-23T13:22:22+00:00</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.2</priority>
 	</url>
 <!-- Debug: Priority report of postID 56: Comments: 1 of 7 = 0.1 points -->	<url>
-		<loc>http://anonymanykterister.se:3000/blogg/2008/11/trevligt/</loc>
+		<loc>http://81.226.212.45/blogg/2008/11/trevligt/</loc>
 		<lastmod>2008-11-21T11:48:17+00:00</lastmod>
 		<changefreq>monthly</changefreq>
 		<priority>0.2</priority>
 	</url>
 	<url>
-		<loc>http://anonymanykterister.se:3000/blogg/about/</loc>
+		<loc>http://81.226.212.45/blogg/about/</loc>
 		<lastmod>2008-11-18T18:05:28+00:00</lastmod>
 		<changefreq>weekly</changefreq>
 		<priority>0.6</priority>

@@ -13,14 +13,20 @@
 		<key>Tabs</key>
 		<array>
 			<dict>
+				<key>DocumentURL</key>
+				<string>file://localhost/Users/pontus/Dropbox/www/blogg/wp-content/themes/sandbox/header.php</string>
 				<key>StateType</key>
-				<string>PreviewTab</string>
-				<key>URL</key>
-				<string>http://localhost/</string>
+				<string>DefaultTab</string>
 			</dict>
 			<dict>
 				<key>DocumentURL</key>
 				<string>file://localhost/Users/pontus/Dropbox/www/blogg/wp-content/themes/sandbox/footer.php</string>
+				<key>StateType</key>
+				<string>DefaultTab</string>
+			</dict>
+			<dict>
+				<key>DocumentURL</key>
+				<string>file://localhost/Users/pontus/Dropbox/www/js-global/an.js</string>
 				<key>StateType</key>
 				<string>DefaultTab</string>
 			</dict>
@@ -32,7 +38,7 @@
 			</dict>
 			<dict>
 				<key>DocumentURL</key>
-				<string>file://localhost/Users/pontus/Dropbox/www/testing/index.html</string>
+				<string>file://localhost/Users/pontus/Dropbox/www/index.php</string>
 				<key>StateType</key>
 				<string>DefaultTab</string>
 			</dict>

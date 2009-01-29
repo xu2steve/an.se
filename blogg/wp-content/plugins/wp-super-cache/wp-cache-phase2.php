@@ -123,7 +123,10 @@ function wp_cache_mutex_init() {
 }
 
 function wp_cache_writers_entry() {
-	global $use_flock, $mutex, $cache_path, $mutex_filename;
+	global $use_flock, $mutex, $cache_path, $mutex_filename, $wp_cache_mutex_disabled;
+
+	if( isset( $wp_cache_mutex_disabled ) && $wp_cache_mutex_disabled )
+		return true;
 
 	if( !$mutex )
 		return false;
@@ -137,7 +140,10 @@ function wp_cache_writers_entry() {
 }
 
 function wp_cache_writers_exit() {
-	global $use_flock, $mutex, $cache_path, $mutex_filename;
+	global $use_flock, $mutex, $cache_path, $mutex_filename, $wp_cache_mutex_disabled;
+
+	if( isset( $wp_cache_mutex_disabled ) && $wp_cache_mutex_disabled )
+		return true;
 
 	if( !$mutex )
 		return false;
@@ -166,7 +172,7 @@ function wp_cache_ob_callback($buffer) {
 	global $cache_path, $cache_filename, $meta_file, $wp_start_time, $supercachedir;
 	global $new_cache, $wp_cache_meta_object, $file_expired, $blog_id, $cache_compression;
 	global $wp_cache_gzip_encoding, $super_cache_enabled, $cached_direct_pages;
-	global $wp_cache_404, $gzsize;
+	global $wp_cache_404, $gzsize, $supercacheonly, $wp_cache_gzip_first;
 
 	$new_cache = true;
 
@@ -207,10 +213,18 @@ function wp_cache_ob_callback($buffer) {
 			$super_cache_enabled = false;
 
 		$tmp_wpcache_filename = $cache_path . uniqid( mt_rand(), true ) . '.tmp';
-		$fr = @fopen($tmp_wpcache_filename, 'w');
-		if (!$fr) {
-			$buffer .= "<!-- File not cached! Super Cache Couldn't write to: " . str_replace( ABSPATH, '', $cache_path ) . $cache_filename . " -->\n";
-			return $buffer;
+
+		// Don't create wp-cache files for anon users
+		$supercacheonly = false;
+		if( $super_cache_enabled && wp_cache_get_cookies_values() == '' )
+			$supercacheonly = true;
+
+		if( !$supercacheonly ) {
+			$fr = @fopen($tmp_wpcache_filename, 'w');
+			if (!$fr) {
+				$buffer .= "<!-- File not cached! Super Cache Couldn't write to: " . str_replace( ABSPATH, '', $cache_path ) . $cache_filename . " -->\n";
+				return $buffer;
+			}
 		}
 		if( $super_cache_enabled ) {
 			if( @is_dir( $dir ) == false )
@@ -224,18 +238,18 @@ function wp_cache_ob_callback($buffer) {
 				$fr2 = @fopen( $tmp_cache_filename, 'w' );
 				if (!$fr2) {
 					$buffer .= "<!-- File not cached! Super Cache Couldn't write to: " . str_replace( ABSPATH, '', $tmp_cache_filename ) . " -->\n";
-					fclose( $fr );
-					unlink( $tmp_wpcache_filename );
+					@fclose( $fr );
+					@nlink( $tmp_wpcache_filename );
 					return $buffer;
 				}
 				if( $cache_compression ) {
 					$gz = @fopen( $tmp_cache_filename . ".gz", 'w');
 					if (!$gz) {
 						$buffer .= "<!-- File not cached! Super Cache Couldn't write to: " . str_replace( ABSPATH, '', $tmp_cache_filename ) . ".gz -->\n";
-						fclose( $fr );
-						unlink( $tmp_wpcache_filename );
-						fclose( $fr2 );
-						unlink( $tmp_cache_filename );
+						@close( $fr );
+						@nlink( $tmp_wpcache_filename );
+						@close( $fr2 );
+						@nlink( $tmp_cache_filename );
 						return $buffer;
 					}
 				}
@@ -252,7 +266,8 @@ function wp_cache_ob_callback($buffer) {
 			/* Clean function calls in tag */
 			$buffer = preg_replace('|<!--mclude (.*?)-->|is', '<!--mclude-->', $buffer);
 			$buffer = preg_replace('|<!--mfunc (.*?)-->|is', '<!--mfunc-->', $buffer);
-			fputs($fr, $store);
+			if( $fr )
+				fputs($fr, $store);
 			if( $fr2 )
 				fputs($fr2, $store . '<!-- super cache -->' );
 			if( $gz )
@@ -268,12 +283,14 @@ function wp_cache_ob_callback($buffer) {
 			if ($wp_cache_gzip_encoding) {
 				array_push($wp_cache_meta_object->headers, 'Content-Encoding: ' . $wp_cache_gzip_encoding);
 				array_push($wp_cache_meta_object->headers, 'Vary: Accept-Encoding, Cookie');
-				array_push($wp_cache_meta_object->headers, 'Content-Length: ' . strlen($gzdata));
+				array_push($wp_cache_meta_object->headers, 'Content-Length: ' . $gzsize);
 				// Return uncompressed data & store compressed for later use
-				fputs($fr, $gzdata);
+				if( $fr )
+					fputs($fr, $gzdata);
 			} else { // no compression
 				array_push($wp_cache_meta_object->headers, 'Vary: Cookie');
-				fputs($fr, $buffer.$log);
+				if( $fr )
+					fputs($fr, $buffer.$log);
 			}
 			if( $fr2 )
 				fputs($fr2, $buffer . $log . '<!-- super cache -->' );
@@ -282,28 +299,37 @@ function wp_cache_ob_callback($buffer) {
 			$buffer .= $log;
 		}
 		$new_cache = true;
-		fclose($fr);
-		if( !@rename( $tmp_wpcache_filename, $cache_path . $cache_filename ) ) {
-			unlink( $cache_path . $cache_filename );
-			rename( $tmp_wpcache_filename, $cache_path . $cache_filename );
+		if( $fr ) {
+			fclose($fr);
+			if( !@rename( $tmp_wpcache_filename, $cache_path . $cache_filename ) ) {
+				@unlink( $cache_path . $cache_filename );
+				@rename( $tmp_wpcache_filename, $cache_path . $cache_filename );
+			}
 		}
 		if( $fr2 ) {
 			fclose($fr2);
 			if( !@rename( $tmp_cache_filename, $cache_fname ) ) {
-				unlink( $cache_fname );
-				rename( $tmp_cache_filename, $cache_fname );
+				@unlink( $cache_fname );
+				@rename( $tmp_cache_filename, $cache_fname );
 			}
 		}
 		if( $gz ) {
 			fclose($gz);
 			if( !@rename( $tmp_cache_filename . '.gz', $cache_fname . '.gz' ) ) {
-				unlink( $cache_fname . '.gz' );
-				rename( $tmp_cache_filename . '.gz', $cache_fname . '.gz' );
+				@unlink( $cache_fname . '.gz' );
+				@rename( $tmp_cache_filename . '.gz', $cache_fname . '.gz' );
 			}
 		}
 	}
 	wp_cache_writers_exit();
-	return $buffer;
+	if ( !headers_sent() && isset( $wp_cache_gzip_first ) && 1 == $wp_cache_gzip_first && $wp_cache_gzip_encoding && $gzdata) {
+		header( 'Content-Encoding: ' . $wp_cache_gzip_encoding );
+		header( 'Vary: Accept-Encoding, Cookie' );
+		header( 'Content-Length: ' . $gzsize );
+		return $gzdata;
+	} else {
+		return $buffer;
+	}
 }
 
 function wp_cache_phase2_clean_cache($file_prefix) {
@@ -311,13 +337,18 @@ function wp_cache_phase2_clean_cache($file_prefix) {
 
 	if( !wp_cache_writers_entry() )
 		return false;
-	if ( ($handle = opendir( $cache_path )) ) { 
-		while ( false !== ($file = readdir($handle))) {
+	if ( ($handle = @opendir( $cache_path )) ) { 
+		while ( false !== ($file = @readdir($handle))) {
 			if ( preg_match("/^$file_prefix/", $file) ) {
-				@unlink($cache_path . $file);
+				$files[] = $file;
 			}
 		}
 		closedir($handle);
+		if( is_array( $files ) )
+			reset( $files );
+		foreach( (array)$files as $file ) {
+			@unlink($cache_path . $file);
+		}
 	}
 	wp_cache_writers_exit();
 }
@@ -325,12 +356,12 @@ function wp_cache_phase2_clean_cache($file_prefix) {
 function prune_super_cache( $directory, $force = false, $rename = false ) {
 	global $gc_file_counter;
 	$c = 0;
-	while( $c < 20 && is_dir( $directory ) )  {
+	while( $c < 200 )  {
 		$gc_file_counter = 0;
 		sc_garbage_collection( $directory, $force, $rename );
 		$c++;
 		if( $gc_file_counter == 0 )
-			$c = 20;
+			$c = 200;
 	}
 }
 
@@ -350,21 +381,36 @@ function sc_garbage_collection( $directory, $force = false, $rename = false ) {
 
 	$oktodelete = false;
 	if (is_dir($directory)) {
-		$directory = trailingslashit( $directory );
-		$entries = glob($directory. '*');
-		if( is_array( $entries ) && !empty( $entries ) ) foreach ($entries as $entry) {
-			if ($entry != '.' && $entry != '..') {
+		if( $dh = @opendir( $directory ) ) {
+			$directory = trailingslashit( $directory );
+			while( ( $entry = @readdir( $dh ) ) !== false ) {
+				if ($entry == '.' || $entry == '..')
+					continue;
+				if( $gc_file_counter < 100 )
+					$files[] = $entry;
+			}
+			closedir($dh);
+			if( is_array( $files ) )
+				reset( $files );
+			foreach( (array)$files as $entry ) {
+				$entry = $directory . $entry;
 				if( $gc_file_counter < 100 ) {
 					sc_garbage_collection( $entry, $force, $rename );
 				}
 				// If entry is a directory, AND it's not a protected one, AND we're either forcing the delete, OR the file is out of date, 
-				if( is_dir( $entry ) && 
-				    !in_array( $entry, $protected_directories ) && 
-				    ( $force || @filemtime( $entry ) + $cache_max_time <= $now ) ) {
+				if( is_dir( $entry ) && !in_array( $entry, $protected_directories ) && ( $force || @filemtime( $entry ) + $cache_max_time <= $now ) ) {
 					// if the directory isn't empty can't delete it
-					if( is_array( glob($entry. '/*') ) ) {
-						continue;
+					if( $handle = @opendir( $entry ) ) {
+						$donotdelete = false;
+						while( !$donotdelete && ( $file = @readdir( $handle ) ) !== false ) {
+							if ($file == '.' || $file == '..')
+								continue;
+							$donotdelete = true;
+						}
+						closedir($handle);
 					}
+					if( $donotdelete )
+						continue;
 					if( !$rename ) {
 						@rmdir( $entry );
 						$gc_file_counter++;
@@ -403,6 +449,12 @@ function wp_cache_phase2_clean_expired($file_prefix) {
 	$now = time();
 	if ( ($handle = opendir( $cache_path )) ) { 
 		while ( false !== ($file = readdir($handle))) {
+			$files[] = $file;
+		}
+		closedir($handle);
+		if( is_array( $files ) )
+			reset( $files );
+		foreach( (array)$files as $file ) {
 			if ( preg_match("/^$file_prefix/", $file) && 
 				(filemtime($cache_path . $file) + $cache_max_time) <= $now  ) {
 				@unlink($cache_path . $file);
@@ -416,15 +468,17 @@ function wp_cache_phase2_clean_expired($file_prefix) {
 				}
 			}
 		}
-		closedir($handle);
 		prune_super_cache( $cache_path . 'supercache' );
 	}
 
 	wp_cache_writers_exit();
+	return true;
 }
 
 function wp_cache_shutdown_callback() {
-	global $cache_path, $cache_max_time, $file_expired, $file_prefix, $meta_file, $new_cache, $wp_cache_meta_object, $known_headers, $blog_id, $wp_cache_gc, $wp_cache_gzip_encoding, $gzsize, $cache_filename;
+	global $cache_path, $cache_max_time, $file_expired, $file_prefix, $meta_file, $new_cache, $wp_cache_meta_object, $known_headers, $blog_id, $wp_cache_gzip_encoding, $gzsize, $cache_filename, $supercacheonly;
+
+	$supercacheonly = false;
 
 	$wp_cache_meta_object->uri = $_SERVER["SERVER_NAME"].preg_replace('/[ <>\'\"\r\n\t\(\)]/', '', $_SERVER['REQUEST_URI']); // To avoid XSS attacs
 	$wp_cache_meta_object->blog_id=$blog_id;
@@ -482,7 +536,7 @@ function wp_cache_shutdown_callback() {
 
 	@ob_end_flush();
 	flush(); //Ensure we send data to the client
-	if ($new_cache) {
+	if ( ! $supercacheonly && $new_cache ) {
 		if( $wp_cache_gzip_encoding && !in_array( 'Content-Encoding: ' . $wp_cache_gzip_encoding, $wp_cache_meta_object->headers ) ) {
 			array_push($wp_cache_meta_object->headers, 'Content-Encoding: ' . $wp_cache_gzip_encoding);
 			array_push($wp_cache_meta_object->headers, 'Vary: Accept-Encoding, Cookie');
@@ -507,8 +561,8 @@ function wp_cache_shutdown_callback() {
 		wp_cache_writers_exit();
 	}
 
-	if( !isset( $wp_cache_gc ) )
-		$wp_cache_gc = 600;
+	if( !isset( $cache_max_time ) )
+		$cache_max_time = 600;
 	$last_gc = get_option( "wpsupercache_gc_time" );
 
 	if( !$last_gc ) {
@@ -516,7 +570,8 @@ function wp_cache_shutdown_callback() {
 		return;
 	}
 
-	if( $last_gc > ( time() - $wp_cache_gc ) ) // do garbage collection once every X hours.
+	$next_gc = $cache_max_time < 1800 ? $cache_max_time : 600;
+	if( $last_gc > ( time() - $next_gc ) )
 		return;
 	update_option( 'wpsupercache_gc_time', time() );
 
@@ -537,7 +592,7 @@ function wp_cache_get_postid_from_comment($comment_id) {
 	// http://ocaoimh.ie/2006/12/05/caching-wordpress-with-wp-cache-in-a-spam-filled-world
 	if( !preg_match('/wp-admin\//', $_SERVER['REQUEST_URI']) ) 
 		if( $comment['comment_approved'] == 'spam' ) { // changed from 1 to "spam"
-			return $post_id;
+			return $postid;
 		} elseif( $comment['comment_approved'] == '0' ) {
 			$super_cache_enabled = 0; // don't remove the super cache static file until comment is approved
 		}
@@ -587,6 +642,12 @@ function wp_cache_post_change($post_id) {
 	$matches = array();
 	if ( ($handle = opendir( $cache_path . 'meta/' )) ) { 
 		while ( false !== ($file = readdir($handle))) {
+			$files[] = $file;
+		}
+		closedir($handle);
+		if( is_array( $files ) )
+			reset( $files );
+		foreach( (array)$files as $file ) {
 			if ( preg_match("/^({$file_prefix}{$blogcacheid}.*)\.meta/", $file, $matches) ) {
 				$meta_pathname = $cache_path . 'meta/' . $file;
 				$content_pathname = $cache_path . $matches[1] . ".html";
@@ -603,7 +664,6 @@ function wp_cache_post_change($post_id) {
 
 			}
 		}
-		closedir($handle);
 	}
 	wp_cache_writers_exit();
 	return $post_id;
@@ -627,13 +687,18 @@ function wp_cache_post_id() {
 }
 
 function wp_cache_gc_cron() {
-	global $file_prefix, $wp_cache_gc;
+	global $file_prefix, $cache_max_time;
 
-	if( !isset( $wp_cache_gc ) )
-		$wp_cache_gc = 600;
+	if( !isset( $cache_max_time ) )
+		$cache_max_time = 600;
 
-	if( !wp_cache_phase2_clean_expired($file_prefix ) )
-		update_option( 'wpsupercache_gc_time', time() - ( $wp_cache_gc - 300 ) ); // if GC failed then run it again in 5 minutes
+	$start = time();
+	if( !wp_cache_phase2_clean_expired($file_prefix ) ) {
+		wp_cache_debug( 'Cache Expiry cron job failed. Probably mutex locked.' );
+		update_option( 'wpsupercache_gc_time', time() - ( $cache_max_time - 10 ) ); // if GC failed then run it again in one minute
+	}
+	if( time() - $start > 30 )
+		wp_cache_debug( "Cache Expiry cron job took more than 30 seconds to execute.\nYou should reduce the Expiry Time in the WP Super Cache admin page\nas you probably have more cache files than your server can handle efficiently." );
 }
 
 ?>
