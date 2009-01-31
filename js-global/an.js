@@ -10,7 +10,7 @@ window.onresize = function () {
 
 function scrolled() {
 	clearTimeout(timer);
-	timer = setTimeout("animateBg()", 300);
+	timer = setTimeout("animateBg()", 100);
 }
 
 function animateBg() {
